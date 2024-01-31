@@ -1,18 +1,19 @@
-package com.vasquez.mscredit.service;
+package com.vasquez.mscredit.service.impl;
 
 import com.vasquez.mscredit.entity.CreditCard;
 import com.vasquez.mscredit.repository.CreditCardRepository;
-import com.vasquez.mscredit.util.CrudUtil;
+import com.vasquez.mscredit.service.CreditCardService;
+import com.vasquez.mscredit.service.CreditService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class CreditCardCardService implements CrudUtil<CreditCard, String> {
+public class CreditCardServiceImpl implements CreditCardService {
 
     private final CreditCardRepository creditCardRepository;
 
-    public CreditCardCardService(CreditCardRepository creditCardRepository) {
+    public CreditCardServiceImpl(CreditCardRepository creditCardRepository) {
         this.creditCardRepository = creditCardRepository;
     }
 
@@ -23,7 +24,11 @@ public class CreditCardCardService implements CrudUtil<CreditCard, String> {
 
     @Override
     public Mono<CreditCard> update(CreditCard request, String id) {
-        return creditCardRepository.save(request);
+        return this.findById(id).flatMap(creditCard -> {
+            creditCard.setAvailableAmount(request.getAvailableAmount());
+            creditCard.setCreditLimit(request.getCreditLimit());
+            return creditCardRepository.save(creditCard);
+        });
     }
 
     @Override
@@ -39,5 +44,9 @@ public class CreditCardCardService implements CrudUtil<CreditCard, String> {
     @Override
     public Mono<Void> deleteById(String id) {
         return creditCardRepository.deleteById(id);
+    }
+
+    public Mono<Integer> countByClientId(String clientId) {
+        return creditCardRepository.countByClientId(clientId);
     }
 }

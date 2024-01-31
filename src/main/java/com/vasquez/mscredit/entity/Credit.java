@@ -27,11 +27,11 @@ public class Credit {
     private Double amountRequested;
 
     @NotNull
-    private String installmentTerm;
+    private Integer maxMonthsOfPayment;
 
     @NotNull
     private Double monthlyFee;
 
-    private LocalDate requestedDate;
+    private LocalDate requestedDate = LocalDate.now();
 
 }

@@ -96,7 +96,7 @@ paths:
           name: creditId
           required: true
           schema:
-            type: integer
+            type: string
       responses:
         '200':
           description: delete credit by id          
@@ -182,6 +182,25 @@ paths:
       responses:
         '200':
           description: delete credit card by id
+  /credit-card/count:
+    get:
+      tags:
+        - CreditCard
+      operationId: countByClientId
+      description: GET
+      parameters:
+        - in: query
+          name: clientId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'response get credit card by client id'
+          content:
+            application/json:
+              schema:
+                type: integer
 
 components:
   schemas:
@@ -189,9 +208,9 @@ components:
       type: object
       description: Credit model
       required:        
-        - clientTypeid
+        - clientTypeId
       properties:        
-        clientTypeid:
+        clientTypeId:
           type: string
           example: 1          
         cardNumber:
@@ -201,16 +220,9 @@ components:
           type: number
           format: double
           example: 20.5
-        installmentTerm:
-          type: string
-          example: '12 meses'        
-        monthlyFee:
-          type: number
-          format: double
-          example: 20.5
-        requestedDate:
-          type: string
-          format: date-time
+        maxMonthsOfPayment:
+          type: integer
+          example: 12             
     CreditResponse:
       type: object
       description: Credit model      
@@ -228,9 +240,9 @@ components:
           type: number
           format: double
           example: 20.5
-        installmentTerm:
-          type: string
-          example: '12 meses'        
+        maxMonthsOfPayment:
+          type: integer
+          example: 12  
         monthlyFee:
           type: number
           format: double
