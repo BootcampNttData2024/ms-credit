@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 @ControllerAdvice
 @AllArgsConstructor
-public class ExceptionHandler {
+public class HandlerException {
     @org.springframework.web.bind.annotation.ExceptionHandler(ResponseStatusException.class)
     public Mono<ResponseEntity<ErrorResponse>> handleResponseStatusException(ResponseStatusException ex) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getBody().getStatus(), ex.getBody().getTitle(), ex.getReason());

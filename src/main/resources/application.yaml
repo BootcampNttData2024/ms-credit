@@ -5,3 +5,6 @@ spring:
     mongodb:
       uri: mongodb+srv://BootcampNttdata2024:k9tUuUwOvkdqqrjE@bootcampnttdata2024.zcxsoou.mongodb.net/?retryWrites=true&w=majority
       database: MSDBCREDIT
+logging:
+  level:
+    root: INFO

@@ -1,12 +1,21 @@
 package com.vasquez.mscredit.entity;
 
-import lombok.*;
+import java.time.LocalDateTime;
+import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-
+/**
+ * Credit entity.
+ *
+ * @author Vasquez
+ * @version 1.0.
+ */
 @Data
 @Builder
 @ToString
@@ -15,23 +24,32 @@ import java.time.LocalDate;
 @Document(collection = "credit")
 public class Credit {
 
-    @Id
-    private String creditId;
+  @Id
+  private String creditId;
 
-    @NotNull
-    private String clientTypeId;
+  @NotNull
+  private String clientId;
 
-    @NotNull
-    private String cardNumber;
+  @NotNull
+  private String productId;
 
-    private Double amountRequested;
+  @NotNull
+  private String cardNumber;
 
-    @NotNull
-    private Integer maxMonthsOfPayment;
+  private Double amountRequested;
 
-    @NotNull
-    private Double monthlyFee;
+  private Double amountPaid;
 
-    private LocalDate requestedDate = LocalDate.now();
+  private Double debtAmount;
+
+  @NotNull
+  private Integer maxMonthsOfPayment;
+
+  @NotNull
+  private Double monthlyFee;
+
+  private String requestedDate = LocalDateTime.now().toString();
+
+  private String paymentDueDate;
 
 }

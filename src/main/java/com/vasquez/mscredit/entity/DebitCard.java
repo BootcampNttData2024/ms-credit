@@ -1,7 +1,5 @@
 package com.vasquez.mscredit.entity;
 
-import java.time.LocalDate;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +8,13 @@ import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.util.List;
+
 /**
- * Credit Card entity.
+ * Debit Card entity.
  *
  * @author Vasquez
  * @version 1.0.
@@ -21,11 +24,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "credit_card")
-public class CreditCard {
+@Document(collection = "debit_card")
+public class DebitCard {
 
   @Id
-  private String creditCardId;
+  private String debitCardId;
 
   @NotNull
   private String productId;
@@ -33,14 +36,16 @@ public class CreditCard {
   @NotNull
   private String clientId;
 
+  @NotNull
   private String cardNumber;
 
   @NotNull
   private Double availableAmount;
 
-  @NotNull
-  private Double creditLimit;
-
   private String expirationDate;
+
+  private String associatedMainAccount;
+
+  private List<String> otherAssociatedAccounts;
 
 }
